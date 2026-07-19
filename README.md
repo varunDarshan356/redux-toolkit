@@ -1,75 +1,270 @@
-# React + TypeScript + Vite
+# Redux Toolkit Tutorial 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript project demonstrating modern state management using **Redux Toolkit** and **React Redux**.
 
-Currently, two official plugins are available:
+This repository focuses on understanding Redux Toolkit concepts with a strongly typed React application built using Vite, including store configuration, slices, reducers, actions, selectors, and connecting React components with global state.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
 
-## Expanding the ESLint configuration
+- React
+- TypeScript
+- Vite
+- CSS
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### State Management
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Redux Toolkit
+- React Redux
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Development Tools
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- npm
+- Git
+
+---
+
+# 📌 Project Overview
+
+As React applications grow, managing shared state across multiple components becomes challenging.
+
+This project demonstrates how Redux Toolkit provides a predictable and scalable approach for managing application state while TypeScript improves type safety and developer experience.
+
+The project covers:
+
+- Redux store configuration
+- Type-safe state management
+- Creating slices
+- Actions and reducers
+- Dispatching actions
+- Selecting state using selectors
+- Connecting React components with Redux
+
+---
+
+# 🧠 Redux Mental Model
+
+Think of Redux as a centralized application memory.
+
+Without Redux:
 
 ```
+Component A
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+    ↓
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Component B
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Sharing state between components becomes difficult.
 
+With Redux:
+
+```
+              Redux Store
+
+                  |
+
+        ---------------------
+
+        |                   |
+
+   Component A        Component B
+```
+
+Components can access shared state through a single source of truth.
+
+---
+
+# 🔄 Redux Data Flow
+
+Redux follows a predictable one-way data flow:
+
+```
+User Interaction
+
+        ↓
+
+dispatch(action)
+
+        ↓
+
+Reducer processes action
+
+        ↓
+
+Redux Store updates state
+
+        ↓
+
+useSelector reads updated state
+
+        ↓
+
+React component re-renders
+```
+---
+
+# ⚛️ React + Redux Architecture
+
+```
+React Component
+
+        |
+
+        ↓
+
+useDispatch()
+
+        |
+
+        ↓
+
+Redux Action
+
+        |
+
+        ↓
+
+Reducer
+
+        |
+
+        ↓
+
+Redux Store
+
+        |
+
+        ↓
+
+useSelector()
+
+        |
+
+        ↓
+
+Updated UI
+```
+
+---
+
+# 🔷 TypeScript with Redux Toolkit
+
+TypeScript provides:
+
+- Type safety
+- Better autocomplete
+- Fewer runtime errors
+- Better developer experience
+
+Common Redux TypeScript patterns:
+
+## Root State Type
+
+```typescript
+export type RootState = ReturnType<
+  typeof store.getState
+>;
+```
+
+---
+
+## Dispatch Type
+
+```typescript
+export type AppDispatch =
+  typeof store.dispatch;
+```
+
+---
+
+# Redux Toolkit Advantages
+
+Traditional Redux required:
+
+```
+actions.js
+
+reducers.js
+
+constants.js
+
+store.js
+```
+
+Redux Toolkit provides:
+
+```
+createSlice()
+
+configureStore()
+
+Automatic action creators
+
+Less boilerplate
+
+Better TypeScript support
+```
+
+---
+
+# Local State vs Redux State
+
+## Local State
+
+Example:
+
+```typescript
+const [count, setCount] = useState(0);
+```
+
+Use for:
+
+- Component-specific data
+- Forms
+- Toggles
+- Temporary UI state
+
+---
+
+## Redux State
+
+Use for:
+
+- Shared application data
+- Authentication
+- Shopping carts
+- User preferences
+- Complex application state
+
+---
+
+# ▶️ Getting Started
+
+## Clone Repository
+
+```bash
+git clone varunDarshan356/redux-toolkit
+
+cd redux-toolkit
+```
+
+---
+
+## Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+## Start Development Server
+
+```bash
+npm run dev
 ```
